@@ -2,10 +2,10 @@ import * as http from "http";
 import * as https from "https";
 import { IncomingMessage, RequestOptions } from "http";
 
-const PING_TARGET = "https://fundraiseup.com/"
-const SERVER_HOSTNAME = "localhost"
-const SERVER_PORT = 8080
-const TIMEOUT = 10000
+const PING_TARGET = "https://fundraiseup.com/";
+const SERVER_HOSTNAME = "localhost";
+const SERVER_PORT = 8080;
+const TIMEOUT = 10000;
 
 type PingInfo = {
   pingId: number;
@@ -110,7 +110,7 @@ function recursivePing() {
 }
 
 function processExitHandler() {
-  console.log("\n",stat);
+  console.log("\n", stat);
   process.exit(0);
 }
 
