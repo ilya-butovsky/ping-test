@@ -72,23 +72,23 @@ async function pingHandler() {
     deliveryAttempt: 1,
     pingId,
   };
+  let opt: RequestOptions = {
+    hostname: SERVER_HOSTNAME,
+    path: "/data",
+    port: SERVER_PORT,
+    timeout: TIMEOUT,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  };
   while (true) {
-    stat.allCount++;
     const body = JSON.stringify(pingInfo);
+    opt.headers["Content-Length"] = Buffer.byteLength(body);
+    stat.allCount++;
     console.log(`CLIENT SEND TO SERVER: ${body}`);
-    const opt: RequestOptions = {
-      hostname: SERVER_HOSTNAME,
-      path: "/data",
-      port: SERVER_PORT,
-      timeout: TIMEOUT,
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(body),
-      },
-      method: "POST",
-    };
     if (pingInfo.deliveryAttempt > 1)
-      await sleep(Math.pow(2, pingInfo.deliveryAttempt - 1) / 2);
+      await sleep((Math.pow(2, pingInfo.deliveryAttempt) - 1) / 2);
     const status = await sendInfo(opt, body);
     responseLogger(status, pingInfo);
     if (status === 500) {
