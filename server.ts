@@ -1,7 +1,7 @@
 import * as http from "http";
 import { IncomingMessage, ServerResponse } from "http";
 
-type PingRequestBody = {
+interface PingRequestBody {
   pingId: number;
   deliveryAttempt: number;
   date: number;

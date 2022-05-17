@@ -7,7 +7,7 @@ const SERVER_HOSTNAME = "localhost";
 const SERVER_PORT = 8080;
 const TIMEOUT = 10000;
 
-type PingInfo = {
+interface PingInfo{
   pingId: number;
   deliveryAttempt: number;
   date: number;
